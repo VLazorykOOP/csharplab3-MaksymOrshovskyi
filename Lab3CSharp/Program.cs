@@ -82,4 +82,115 @@ class Program
         // Приклад отримання коліру трикутника
         Console.WriteLine($"Колір трикутника: {triangle1.Color}");
     }
+//_____________________________________________________task 2
+
+using System;
+using System.Collections.Generic;
+
+// Базовий клас Person
+class Person
+{
+    // Захищені поля, які характерні для кожної персони
+    protected string name;
+    protected int age;
+
+    // Конструктор класу
+    public Person(string name, int age)
+    {
+        this.name = name;
+        this.age = age;
+    }
+
+    // Метод для виведення інформації про об'єкт
+    public virtual void Show()
+    {
+        Console.WriteLine($"Ім'я: {name}, Вік: {age}");
+    }
+}
+
+// Похідний клас для службовця
+class Employee : Person
+{
+    // Додаткове поле для службовця
+    protected string department;
+
+    // Конструктор класу
+    public Employee(string name, int age, string department) : base(name, age)
+    {
+        this.department = department;
+    }
+
+    // Перевизначений метод для виведення інформації про об'єкт
+    public override void Show()
+    {
+        base.Show();
+        Console.WriteLine($"Відділ: {department}");
+    }
+}
+
+// Похідний клас для робітника
+class Worker : Person
+{
+    // Додаткове поле для робітника
+    protected string position;
+
+    // Конструктор класу
+    public Worker(string name, int age, string position) : base(name, age)
+    {
+        this.position = position;
+    }
+
+    // Перевизначений метод для виведення інформації про об'єкт
+    public override void Show()
+    {
+        base.Show();
+        Console.WriteLine($"Посада: {position}");
+    }
+}
+
+// Похідний клас для інженера
+class Engineer : Person
+{
+    // Додаткове поле для інженера
+    protected string specialization;
+
+    // Конструктор класу
+    public Engineer(string name, int age, string specialization) : base(name, age)
+    {
+        this.specialization = specialization;
+    }
+
+    // Перевизначений метод для виведення інформації про об'єкт
+    public override void Show()
+    {
+        base.Show();
+        Console.WriteLine($"Спеціалізація: {specialization}");
+    }
+}
+
+class Program
+{
+    static void Main()
+    {
+        // Створення масиву персон
+        List<Person> people = new List<Person>();
+
+        // Наповнення масиву різними об'єктами похідних класів
+        people.Add(new Employee("Іван", 30, "Відділ продажу"));
+        people.Add(new Worker("Петро", 35, "Електрик"));
+        people.Add(new Engineer("Марія", 28, "Інформаційні технології"));
+
+        // Виведення масиву впорядкованого за іменем
+        Console.WriteLine("Масив персон впорядкований за іменем:");
+        people.Sort((x, y) => String.Compare(x.GetType().Name, y.GetType().Name));
+        foreach (var person in people)
+        {
+            person.Show();
+            Console.WriteLine();
+        }
+    }
+}
+
+
+
 }
